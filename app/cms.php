@@ -14,8 +14,7 @@ class CMS extends Controller {
 		if ($page->dry()) {
 			$f3->error(404);
 			die;
-		}
-		else {
+		} else {
 			$page->copyto('page');
 			$f3->set('comments',
 				$db->exec(
@@ -91,10 +90,7 @@ class CMS extends Controller {
 			$loc=Web\Geo::instance()->location();
 			if (isset($loc['continent_code']) && $loc['continent_code']=='EU')
 				$f3->set('message',
-					'The administrator pages of this Web site uses cookies '.
-					'for identification and security. Without these '.
-					'cookies, these pages would simply be inaccessible. By '.
-					'using these pages you agree to this safety measure.');
+                    'The administrator pages of this Web site uses cookies for identification and security. Without these cookies, these pages would simply be inaccessible. By using these pages you agree to this safety measure.');
 		}
 		$f3->set('COOKIE.sent',TRUE);
 		if ($f3->get('message')) {
@@ -109,11 +105,11 @@ class CMS extends Controller {
 	}
 
 	//! Process login form
-	function auth($f3) {
+	function auth ($f3) {
 		if (!$f3->get('COOKIE.sent'))
 			$f3->set('message','Cookies must be enabled to enter this area');
 		else {
-			$crypt=$f3->get('password');
+            $crypt = $f3->get ('password');
 			$captcha=$f3->get('SESSION.captcha');
 			if ($captcha && strtoupper($f3->get('POST.captcha'))!=$captcha)
 				$f3->set('message','Invalid CAPTCHA code');
